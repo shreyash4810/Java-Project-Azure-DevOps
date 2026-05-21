@@ -1,0 +1,34 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  name: javapool
+  demands:
+    - Agent.name -equals javaagent
+
+stages:
+- stage: Build
+  displayName: compile
+
+  jobs:
+  - job: compile
+    steps:
+      - task: Maven@4
+        inputs:
+          azureSubscription: 'Azure subscription 1(2b991cbf-3249-4aa2-9d38-9b026b171757)'
+          mavenPomFile: 'pom.xml'
+          goals: 'compile'
+          publishJUnitResults: true
+          testResultsFiles: '**/surefire-reports/TEST-*.xml'
+          javaHomeOption: 'JDKVersion'
+          mavenVersionOption: 'Default'
+          mavenAuthenticateFeed: false
+          effectivePomSkip: false
+          sonarQubeRunAnalysis: false
+    
+   
