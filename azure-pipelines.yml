@@ -9,7 +9,7 @@ trigger:
 pool:
   name: javapool
   demands:
-    - Agent.name -equals javaagent
+    - Agent.Name -equals javaagent
 
 stages:
 - stage: Build
