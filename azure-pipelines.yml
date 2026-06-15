@@ -20,7 +20,7 @@ stages:
     steps:
       - task: Maven@4
         inputs:
-          azureSubscription: 'Azure subscription 1(2b991cbf-3249-4aa2-9d38-9b026b171757)'
+          azureSubscription: 'Azure subscription 1(2)(8d924bc3-7a13-47ee-9bfb-69b45fab07d4)'
           mavenPomFile: 'pom.xml'
           goals: 'compile'
           publishJUnitResults: true
