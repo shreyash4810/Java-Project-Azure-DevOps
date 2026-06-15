@@ -61,3 +61,19 @@ stages:
       - task: CmdLine@2
         inputs:
           script: 'trivy fs --format table -o fs.html .'
+
+- stage: 
+  displayName: docker
+
+  jobs:
+  - job: buildandpush
+    steps:
+      - task: CmdLine@2
+        inputs:
+          script: 'mvn package'
+      - task: Docker@2
+        inputs:
+          containerRegistry: 'acr-conn'
+          repository: 'classregistery'
+          command: 'buildAndPush'
+          Dockerfile: '**/Dockerfile'
