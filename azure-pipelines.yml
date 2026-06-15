@@ -4,12 +4,12 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+- none
 
 pool:
-  name: javapool
+  name: Default
   demands:
-    - Agent.Name -equals javaagent
+    - Agent.Name -equals my agent
 
 stages:
 - stage: Build
