@@ -12,20 +12,22 @@ pool:
     - Agent.Name -equals my agent
 
 stages:
-  -  stage: 
-     displayName: compile
-     jobs:
-       - job: compile
-         steps:
-           - 
-- task: Maven@4
-  inputs:
-    azureSubscription: 'Azure subscription 1(8d924bc3-7a13-47ee-9bfb-69b45fab07d4)'
-    mavenPomFile: 'pom.xml'
-    publishJUnitResults: true
-    testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    javaHomeOption: 'JDKVersion'
-    mavenVersionOption: 'Default'
-    mavenAuthenticateFeed: false
-    effectivePomSkip: false
-    sonarQubeRunAnalysis: false
+- stage: Compile
+  displayName: Compile
+  jobs:
+  - job: CompileJob
+    displayName: Compile Java Application
+    steps:
+    - task: Maven@4
+      displayName: Maven Build
+      inputs:
+        mavenPomFile: 'pom.xml'
+        goals: 'clean compile'
+        publishJUnitResults: true
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.17'
+        mavenVersionOption: 'Default'
+        mavenAuthenticateFeed: false
+        effectivePomSkip: false
+        sonarQubeRunAnalysis: false
