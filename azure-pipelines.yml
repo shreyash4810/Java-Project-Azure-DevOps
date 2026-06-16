@@ -66,14 +66,25 @@ stages:
   displayName: docker
 
   jobs:
-  - job: buildandpush
+  - job: BuildAndPush
+    displayName: Build and Push
+
     steps:
-      - task: CmdLine@2
-        inputs:
-          script: 'mvn package'
-      - task: Docker@2
-        inputs:
-          containerRegistry: 'axrconn-1'
-          repository: 'classregistry'
-          command: 'buildAndPush'
-          Dockerfile: '**/Dockerfile'
+    - script: |
+        whoami
+        groups
+        ls -l /var/run/docker.sock
+        docker ps
+      displayName: 'Docker Debug'
+
+    - task: Maven@4
+      inputs:
+        mavenPomFile: 'pom.xml'
+        goals: 'clean package'
+
+    - task: Docker@2
+      inputs:
+           containerRegistry: 'axrconn-1'
+           repository: 'classregistry'
+           command: 'buildAndPush'
+           Dockerfile: '**/Dockerfile'
