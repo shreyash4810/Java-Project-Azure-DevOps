@@ -73,7 +73,7 @@ stages:
           script: 'mvn package'
       - task: Docker@2
         inputs:
-          containerRegistry: 'acr-conn'
-          repository: 'classregistery'
+          containerRegistry: 'axrconn-1'
+          repository: 'classregistry'
           command: 'buildAndPush'
           Dockerfile: '**/Dockerfile'
